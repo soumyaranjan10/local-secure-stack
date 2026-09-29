@@ -24,16 +24,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install graphifyy
 
-    - name: Generate Knowledge Graph
+    - name: Generate Knowledge Graph (Code-Only)
       run: |
-        graphify .
+        graphify . --code-only
 
     - name: Upload Graph Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: repository-graph
         path: graphify-out/
-        
-    - name: Generate Knowledge Graph
-      run: |
-        graphify . --code-only
