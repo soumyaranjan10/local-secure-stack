@@ -33,3 +33,7 @@ jobs:
       with:
         name: repository-graph
         path: graphify-out/
+        
+    - name: Generate Knowledge Graph
+      run: |
+        graphify . --code-only
