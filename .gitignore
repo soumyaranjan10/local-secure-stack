@@ -1,0 +1,15 @@
+# OS generated files
+Thumbs.db
+ehthumbs.dp
+Desktop.ini
+$RECYCLE.BIN/
+
+# Python cache and virtual environments
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Kubernetes temporary files / local overrides
+*.local.yaml
