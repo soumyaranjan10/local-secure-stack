@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [ "main" ]
 
+permissions:
+  security-events: write
+  contents: read
+
 jobs:
   semgrep-sast:
     name: Semgrep SAST & Secret Scan
@@ -21,10 +25,11 @@ jobs:
           p/security-audit
           p/secrets
           p/python
-        generate-sarif: true
+        # Explicitly output the SARIF file so the upload step can find it
+        output: semgrep.sarif
 
     - name: Upload SARIF report for GitHub Security Tab
-      uses: github/codeql-action/upload-sarif@v3
+      uses: github/codeql-action/upload-sarif@v4
       if: always()
       with:
         sarif_file: semgrep.sarif
