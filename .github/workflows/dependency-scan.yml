@@ -1,0 +1,24 @@
+name: Dependency Vulnerability Scan (SCA)
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  trivy-dependency-scan:
+    name: Trivy SCA File Scan
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Run Trivy Vulnerability Scanner on Filesystem
+      uses: aquasecurity/trivy-action@master
+      with:
+        scan-type: 'fs'
+        scan-ref: '.'
+        format: 'table'
+        severity: 'HIGH,CRITICAL'
+        exit-code: '1' # Fails the build if vulnerable dependencies are detected
