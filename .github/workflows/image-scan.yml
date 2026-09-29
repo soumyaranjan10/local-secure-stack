@@ -15,7 +15,7 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Build Local Docker Image
-      run: docker build -t local-fastapi:${{ github.sha }} .
+      run: docker build -f app/Dockerfile -t local-fastapi:${{ github.sha }} ./app
 
     - name: Run Trivy Scanner
       uses: aquasecurity/trivy-action@master
@@ -23,4 +23,4 @@ jobs:
         image-ref: 'local-fastapi:${{ github.sha }}'
         format: 'table'
         severity: 'HIGH,CRITICAL'
-        exit-code: '1' # Automatically fails the pipeline if HIGH or CRITICAL vulnerabilities are found
+        exit-code: '1'
