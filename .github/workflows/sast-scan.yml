@@ -25,8 +25,10 @@ jobs:
           p/security-audit
           p/secrets
           p/python
-        # Tell the semgrep action to write out the sarif file natively
-        generate-sarif: "1"
+        # Use the official metric flag to write out the sarif file path correctly
+        pub: false
+      env:
+        SEMGREP_SARIF_FILE: "semgrep.sarif"
 
     - name: Upload SARIF report for GitHub Security Tab
       uses: github/codeql-action/upload-sarif@v4
